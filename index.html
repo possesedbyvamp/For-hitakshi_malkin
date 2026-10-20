@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12060f">
+<title>For Hitakshi ♡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%A4%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12060f;--plum:#2a0f26;--wine:#5a1230;--cherry:#8c1d3c;--blush:#f3c9d2;--gold:#d8b878;--ivory:#fbf4ea;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",-apple-system,"Helvetica Neue",Arial,sans-serif;--hand:"Caveat","Bradley Hand",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--ivory);font-family:var(--sans);font-weight:300;line-height:1.75;overflow-x:hidden;
+padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body.locked{overflow:hidden;height:100%}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(120% 70% at 50% 0,#3a1233 0,transparent 60%),radial-gradient(90% 60% at 100% 100%,#4a0f27 0,transparent 60%),var(--ink)}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--cherry),var(--gold));z-index:50;box-shadow:0 0 8px var(--gold)}
+#glow{position:fixed;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:1px solid rgba(216,184,120,.7);pointer-events:none;z-index:60;opacity:0;transition:opacity .3s,transform .15s}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn{display:inline-block;min-height:52px;padding:14px 34px;border-radius:999px;border:1px solid var(--gold);background:linear-gradient(135deg,rgba(140,29,60,.85),rgba(90,18,48,.85));font-family:var(--serif);font-size:1.25rem;letter-spacing:.03em;color:var(--ivory);box-shadow:0 0 22px rgba(140,29,60,.55);transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(216,184,120,.45)}
+.btn:active{transform:scale(.97)}
+#friends{position:relative;z-index:5;transition:transform .45s cubic-bezier(.3,1.6,.5,1),box-shadow .25s}
+#yes{transition:transform .4s}
+.btn.soft{background:transparent;box-shadow:none;border-color:rgba(243,201,210,.45);color:var(--blush)}
+
+/* gate */
+#gate{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;background:radial-gradient(80% 60% at 50% 40%,#3d1236,var(--ink));transition:opacity 1.1s ease,transform 1.1s ease,visibility 1.1s}
+#gate.gone{opacity:0;transform:scale(1.08);visibility:hidden}
+#gate p.a{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,6.2vw,2.5rem);line-height:1.35;max-width:620px;color:var(--blush);opacity:0;animation:fade 2s .4s forwards}
+#gate h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,11vw,4.6rem);margin:26px 0 8px;color:var(--ivory);opacity:0;animation:fade 2s 2.2s forwards}
+#gate .btn{opacity:0;animation:fade 1.6s 3.4s forwards;margin-top:26px}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.heart{width:64px;height:58px;position:relative;margin:30px auto 0;animation:beat 1.8s infinite;opacity:0;animation:fade 1.5s 1.8s forwards,beat 1.8s 3.3s infinite}
+.heart::before,.heart::after{content:"";position:absolute;top:0;width:34px;height:54px;border-radius:34px 34px 0 0;background:radial-gradient(circle at 30% 30%,#e0476a,var(--cherry) 60%,var(--wine));filter:drop-shadow(0 0 14px rgba(224,71,106,.85))}
+.heart::before{left:6px;transform:rotate(-45deg);transform-origin:100% 100%}
+.heart::after{left:-6px;transform:rotate(45deg);transform-origin:0 100%}
+.heart{transform:translateX(10px)}
+@keyframes beat{0%,100%{transform:translateX(10px) scale(1)}15%{transform:translateX(10px) scale(1.14)}30%{transform:translateX(10px) scale(1)}45%{transform:translateX(10px) scale(1.09)}}
+
+/* layout */
+main{opacity:0;transition:opacity 1.4s .3s}
+main.on{opacity:1}
+section{position:relative;padding:clamp(80px,16vw,150px) 24px;max-width:760px;margin:0 auto}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,8.5vw,3.6rem);line-height:1.12;color:var(--ivory);margin-bottom:34px}
+h2 small{display:block;font-family:var(--hand);font-size:1.3rem;color:var(--gold);margin-bottom:6px;font-weight:500}
+p{font-size:1.05rem;margin-bottom:1.3em;color:#ecdde0;max-width:62ch}
+p.s{font-family:var(--serif);font-size:1.3rem;line-height:1.7}
+.div{display:flex;align-items:center;gap:14px;max-width:320px;margin:0 auto;color:var(--gold);font-size:.9rem}
+.div::before,.div::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.div::after{background:linear-gradient(270deg,transparent,var(--gold))}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s ease,transform 1.1s ease}
+.rv.in{opacity:1;transform:none}
+
+/* hero */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;text-align:center;align-items:center}
+#hero h2{font-size:clamp(3rem,15vw,6.5rem);font-style:italic;margin-bottom:18px;text-shadow:0 0 40px rgba(224,71,106,.4)}
+#hero p{margin:0 auto;font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--blush)}
+.hint{margin-top:40px;font-size:.9rem;color:var(--gold);animation:bob 2.4s infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+
+/* typography lines */
+.lines{display:grid;gap:clamp(60px,14vw,110px);padding:30px 0}
+.lines blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,7.6vw,3rem);line-height:1.25;color:var(--blush);border-left:1px solid var(--gold);padding-left:20px}
+.lines blockquote span{display:inline-block;opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s}
+.lines blockquote.in span{opacity:1;transform:none}
+
+/* poems */
+.poem{position:relative;margin:34px 0;padding:34px 28px;border:1px solid rgba(216,184,120,.55);border-radius:4px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(90,18,48,.25));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.poem::before{content:"";position:absolute;inset:6px;border:1px solid rgba(216,184,120,.18);pointer-events:none}
+.poem h3{font-family:var(--hand);font-weight:500;font-size:1.6rem;color:var(--gold);margin-bottom:12px}
+.poem p{font-family:var(--serif);font-size:1.3rem;line-height:1.7;margin:0;color:var(--ivory)}
+.poem:nth-of-type(even){margin-left:clamp(0px,5vw,40px)}
+
+/* letter */
+.paper{padding:clamp(28px,7vw,56px) clamp(22px,6vw,52px);background:linear-gradient(180deg,#fbf1e2,#f2e2cc);color:#3b1a22;border-radius:3px;box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 6px rgba(216,184,120,.25);transform:rotate(-.6deg)}
+.paper p{color:#3b1a22;font-family:var(--serif);font-size:1.28rem;line-height:1.75}
+.paper .sign{font-family:var(--hand);font-size:1.9rem;color:var(--cherry);margin:0}
+
+/* apology */
+.frame{margin:10px auto 34px;width:min(260px,72vw);aspect-ratio:3/4;position:relative;padding:14px;background:linear-gradient(145deg,#e8cd92,#a8844a 55%,#e8cd92);box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 40px rgba(216,184,120,.2)}
+.frame .in2{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:16px;background:radial-gradient(circle at 50% 40%,#3a1233,#12060f);border:2px solid #6b4f26}
+.frame .in2 span{font-family:var(--hand);font-size:1.35rem;color:var(--blush);line-height:1.3}
+.mini{width:22px;height:20px;position:relative;animation:beat2 1.6s infinite}
+.mini::before,.mini::after{content:"";position:absolute;top:0;width:12px;height:19px;border-radius:12px 12px 0 0;background:#e0476a;filter:drop-shadow(0 0 6px #e0476a)}
+.mini::before{left:2px;transform:rotate(-45deg);transform-origin:100% 100%}
+.mini::after{left:-2px;transform:rotate(45deg);transform-origin:0 100%}
+@keyframes beat2{50%{transform:scale(1.25)}}
+.spark{position:absolute;color:var(--gold);font-size:1.2rem;animation:tw 2.8s infinite;pointer-events:none}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(40deg)}}
+.sorry{font-family:var(--serif);font-size:clamp(1.35rem,5.6vw,1.9rem);line-height:1.5;text-align:center;color:var(--ivory);max-width:30ch;margin:0 auto}
+
+/* cards */
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+.card{position:relative;min-height:150px;padding:24px 22px;text-align:left;border:1px solid rgba(216,184,120,.45);border-radius:4px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(90,18,48,.3));overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.card h3{font-family:var(--serif);font-weight:500;font-size:1.55rem;color:var(--blush);line-height:1.2}
+.card .t{display:block;margin-top:14px;font-size:1rem;color:#ecdde0;max-height:0;opacity:0;transition:max-height .7s ease,opacity .7s ease}
+.card .tap{display:block;margin-top:12px;font-family:var(--hand);font-size:1.15rem;color:var(--gold)}
+.card.open{border-color:var(--gold);box-shadow:0 0 30px rgba(140,29,60,.5)}
+.card.open .t{max-height:240px;opacity:1}
+.card.open .tap{display:none}
+
+/* finale */
+#finale{text-align:center;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#finale h2{font-style:italic}
+#finale .q{font-family:var(--serif);font-size:clamp(1.7rem,7vw,2.6rem);line-height:1.3;color:var(--blush);margin-bottom:34px}
+.choices{display:flex;flex-direction:column;gap:14px;width:100%;max-width:340px}
+#answer{margin-top:34px;max-width:34ch;font-family:var(--serif);font-size:1.4rem;line-height:1.6;color:var(--ivory);min-height:1px}
+#answer.show{animation:fade 1.4s forwards}
+footer{text-align:center;padding:50px 24px calc(50px + env(safe-area-inset-bottom));font-family:var(--hand);font-size:1.35rem;color:var(--gold)}
+
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}.card:nth-child(even){transform:translateY(30px)}.choices{flex-direction:row;max-width:none;justify-content:center}}
+@media(max-width:340px){section{padding-left:18px;padding-right:18px}.btn{padding:14px 22px;font-size:1.1rem}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important;scroll-behavior:auto!important}.rv,.lines blockquote span{opacity:1;transform:none}#gate p.a,#gate h1,#gate .btn,.heart{opacity:1}}
+</style>
+</head>
+<body class="locked">
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="bar"></div>
+<div id="glow" aria-hidden="true"></div>
+
+<div id="gate">
+  <p class="a">Some people don’t even realize how beautiful they make the world feel.</p>
+  <div class="heart" aria-hidden="true"></div>
+  <h1>For Hitakshi, ♡</h1>
+  <button class="btn" id="open" type="button">Open something special</button>
+</div>
+
+<main id="main">
+<section id="hero">
+  <h2>Hitakshi</h2>
+  <p>A small story, written with a lot of nervous courage.</p>
+  <div class="hint">scroll slowly ↓</div>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>The Beginning</small>It started without any effort at all.</h2>
+  <p class="rv">I don’t think anyone decides to become special to someone. It just happens quietly. One day you notice you’re smiling at your phone a little longer, or thinking about something someone said hours ago.</p>
+  <p class="rv">You never tried to impress me, and maybe that is exactly why it worked. Everything about it felt natural, like it was always going to happen.</p>
+  <p class="rv">So this page is my way of saying a few things I couldn’t say properly out loud. Take your time with it. There’s no hurry anywhere in here.</p>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>Her Beauty</small>The kind you notice twice.</h2>
+  <p class="rv">Your eyes have a way of looking at people as if they are actually listening. It’s rare, and it makes whoever you’re talking to feel seen.</p>
+  <p class="rv">Your smile doesn’t arrive all at once. It begins somewhere in your expression and slowly takes over the whole moment. I think that’s why it feels earned, like a small gift.</p>
+  <p class="rv">And your presence is calm and bright at the same time. A room feels different when you’re in it, even if you haven’t said a word.</p>
+  <div class="lines">
+    <blockquote><span>Maybe you don’t see yourself the way I see you.</span></blockquote>
+    <blockquote><span>There is something about your smile that makes ordinary moments feel different.</span></blockquote>
+    <blockquote><span>Some kinds of beauty don’t need an explanation. They simply stay with you.</span></blockquote>
+    <blockquote><span>Your face is lovely, yes. But it’s the way you carry yourself that I keep thinking about.</span></blockquote>
+  </div>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>The Little Things</small>It’s always the small details.</h2>
+  <p class="rv">The way a sentence of yours changes halfway because a better idea showed up. The way your expression says something before your words catch up.</p>
+  <p class="rv">The energy you bring into a conversation, light enough to make it easy and warm enough to make it matter. A five-minute chat with you can quietly fix a bad day, and I don’t think you even know you do that.</p>
+  <p class="rv">Big things are easy to remember. But I’ve realised I remember the tiny ones about you far better.</p>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>Original Poetry</small>Five small poems, all yours.</h2>
+
+  <article class="poem rv"><h3>Softly</h3><p>I did not plan to feel this way,<br>it came like evening light.<br>It settled slowly on my days<br>and made the ordinary bright.</p></article>
+
+  <article class="poem rv"><h3>Your eyes</h3><p>They don’t just look, they listen,<br>they hold a quiet sky.<br>I forget the thing I wanted to say<br>whenever you glance my way.</p></article>
+
+  <article class="poem rv"><h3>Your smile</h3><p>It starts as a small hello,<br>then turns the whole room warm.<br>I’d trade a hundred louder things<br>to be there when it forms.</p></article>
+
+  <article class="poem rv"><h3>Past midnight</h3><p>The city sleeps, the phone goes dim,<br>and still your name stays near.<br>The stars outside keep guessing<br>what I’m too shy to say out loud here.</p></article>
+
+  <article class="poem rv"><h3>I can’t say when</h3><p>I cannot tell you the day it began,<br>there was no door, no bell.<br>I only know one morning<br>I was already, softly, under your spell.</p></article>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>A Letter For Her</small>Hitakshi, read this slowly.</h2>
+  <div class="paper rv">
+    <p>Hi Hitakshi,</p>
+    <p>I rewrote this a lot of times. My hands are honestly a bit shaky, and I still don’t know if I’m saying it right. So I’ll just be honest.</p>
+    <p>I like you. Not in a loud, filmy way. More like how you notice one day that a person has become the best part of your day, and you can’t pinpoint when.</p>
+    <p>You make normal things feel nicer. A random chat, a small joke, even a short reply from you. I catch myself smiling and then pretending I wasn’t. You have a way of being kind and fun at the same time, and that’s a rare combination.</p>
+    <p>I’m not writing this to pressure you or to expect anything. You don’t owe me an answer, a reaction or even a reply. I only didn’t want to keep it hidden forever and wonder later what if I had said it.</p>
+    <p>Whatever you feel, I’m glad you exist in my world, and I mean that. If we stay friends, I’ll value that fully. If it ever becomes more, I’ll be the happiest, and I’ll never take it lightly.</p>
+    <p>Thank you for reading this far. Really.</p>
+    <p class="sign">— a guy who genuinely likes you ♡</p>
+  </div>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section style="text-align:center">
+  <h2 class="rv"><small>The Picture Apology 😭</small>A frame, waiting.</h2>
+  <div class="frame rv">
+    <span class="spark" style="top:-14px;left:-10px">✦</span>
+    <span class="spark" style="top:30%;right:-16px;animation-delay:.9s">✧</span>
+    <span class="spark" style="bottom:-12px;left:22%;animation-delay:1.7s">✦</span>
+    <div class="in2"><div class="mini"></div><span>No pictures here, only the feeling behind them.</span></div>
+  </div>
+  <p class="sorry rv">I’m sorry, Hitakshi 😭❤️ Mere paas aapki pictures nahi thi, warna main is website ko aur bhi zyada beautiful banane ki poori koshish karta. I wanted to make something special for you, even without having your pictures.</p>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>Things I Appreciate About You</small>Tap each one.</h2>
+  <div class="grid">
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your warmth</h3><span class="t">You make people comfortable without trying. It’s a quiet talent and you have a lot of it.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your smile</h3><span class="t">It makes a simple moment feel like something worth remembering.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your voice</h3><span class="t">The way you speak is calm and lively together. I could listen to you talk about anything.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your honesty</h3><span class="t">You say what you mean, kindly. That’s something I respect deeply.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your expressions</h3><span class="t">Your face tells a small story every time you react. It’s hard not to smile along.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your energy</h3><span class="t">You bring a light into conversations that makes them easier and brighter.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Your kindness</h3><span class="t">The little considerate things you do don’t go unnoticed, even when you think they do.</span><span class="tap">tap to open</span></button>
+    <button class="card rv" type="button" aria-expanded="false"><h3>Simply you</h3><span class="t">You never needed to become anyone else to be wonderful. Please never forget that.</span><span class="tap">tap to open</span></button>
+  </div>
+</section>
+
+<div class="div" aria-hidden="true">✦</div>
+
+<section>
+  <h2 class="rv"><small>A Small Promise</small>What I can promise.</h2>
+  <p class="rv s">I promise to appreciate you for who you are, not for who I wish you’d be. I’ll respect whatever you feel, whenever you feel it, and I’ll never treat your honesty as something to argue with.</p>
+  <p class="rv s">Your comfort matters more to me than my own hopes. And above everything, I wish you a life full of the kind of happiness that you give so easily to others.</p>
+</section>
+
+<section id="finale">
+  <h2 class="rv">Okay, one last thing, Hitakshi…</h2>
+  <p class="q rv">Would you like to see where this little story goes? ❤️</p>
+  <div class="choices rv">
+    <button class="btn" id="yes" type="button">I’d like that ♡</button>
+    <button class="btn soft" id="friends" type="button">Let’s just stay friends</button>
+  </div>
+  <button id="real" type="button" style="display:none;margin-top:22px;background:none;border:0;padding:12px;font-family:var(--hand);font-size:1.2rem;color:var(--gold);text-decoration:underline">Mazaak ho gaya, mujhe seriously jawab dena hai</button>
+  <p id="answer" role="status" aria-live="polite"></p>
+</section>
+
+<footer>Made with a little courage and a lot of affection ♡</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var fine=window.matchMedia("(pointer: fine)").matches;
+var cv=document.getElementById("fx"),cx=cv.getContext("2d"),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+var items=[],bursts=[];
+function size(){W=window.innerWidth;H=window.innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+function mk(){
+  var n=W<500?26:50;items=[];
+  for(var i=0;i<n;i++){items.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.4,v:Math.random()*.25+.05,h:Math.random()<.22,p:Math.random()*6.28,s:Math.random()*8+8})}
+}
+function heartPath(x,y,s){
+  cx.beginPath();cx.moveTo(x,y+s*.3);
+  cx.bezierCurveTo(x,y-s*.1,x-s*.6,y-s*.1,x-s*.6,y+s*.3);
+  cx.bezierCurveTo(x-s*.6,y+s*.65,x,y+s*.85,x,y+s*1.1);
+  cx.bezierCurveTo(x,y+s*.85,x+s*.6,y+s*.65,x+s*.6,y+s*.3);
+  cx.bezierCurveTo(x+s*.6,y-s*.1,x,y-s*.1,x,y+s*.3);cx.closePath();
+}
+var t=0;
+function draw(){
+  t+=.016;cx.clearRect(0,0,W,H);
+  for(var i=0;i<items.length;i++){
+    var o=items[i];
+    if(!reduce){o.y-=o.v;o.x+=Math.sin(t+o.p)*.15;if(o.y<-20){o.y=H+20;o.x=Math.random()*W}}
+    var a=.35+.35*Math.sin(t*1.5+o.p);
+    if(o.h){cx.fillStyle="rgba(224,71,106,"+(a*.8)+")";heartPath(o.x,o.y,o.s);cx.fill()}
+    else{cx.fillStyle="rgba(216,184,120,"+a+")";cx.beginPath();cx.arc(o.x,o.y,o.r,0,6.283);cx.fill()}
+  }
+  for(var j=bursts.length-1;j>=0;j--){
+    var b=bursts[j];b.x+=b.vx;b.y+=b.vy;b.vy+=.04;b.life-=.008;
+    if(b.life<=0){bursts.splice(j,1);continue}
+    cx.fillStyle="rgba("+b.c+","+b.life+")";heartPath(b.x,b.y,b.s);cx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+function burst(n){
+  var cols=["224,71,106","243,201,210","216,184,120","140,29,60"];
+  for(var i=0;i<n;i++){
+    var ang=Math.random()*6.283,sp=Math.random()*4+1.5;
+    bursts.push({x:W/2,y:H*.55,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-3,s:Math.random()*14+8,life:1,c:cols[i%4]});
+  }
+}
+size();mk();draw();
+window.addEventListener("resize",function(){size();mk()});
+
+var main=document.getElementById("main"),gate=document.getElementById("gate");
+document.getElementById("open").addEventListener("click",function(){
+  gate.classList.add("gone");document.body.classList.remove("locked");
+  main.classList.add("on");window.scrollTo(0,0);
+  if(!reduce)burst(24);
+  setTimeout(function(){gate.style.display="none"},1200);
+});
+
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      var el=e.target;
+      if(el.tagName==="BLOCKQUOTE"){
+        var sp=el.querySelector("span");
+        var words=sp.textContent.split(" ");sp.textContent="";
+        words.forEach(function(w,i){
+          var s=document.createElement("span");s.textContent=w+"\u00a0";
+          s.style.transitionDelay=(reduce?0:i*90)+"ms";sp.appendChild(s);
+        });
+        el.classList.add("in");
+        sp.style.opacity=1;sp.style.transform="none";
+        var kids=sp.children;
+        requestAnimationFrame(function(){for(var k=0;k<kids.length;k++)kids[k].style.opacity=1,kids[k].style.transform="none"});
+      }
+      el.classList.add("in");io.unobserve(el);
+    }
+  });
+},{threshold:.18,rootMargin:"0px 0px -6% 0px"});
+Array.prototype.forEach.call(document.querySelectorAll(".rv,.lines blockquote"),function(el){io.observe(el)});
+
+Array.prototype.forEach.call(document.querySelectorAll(".card"),function(c){
+  c.addEventListener("click",function(){
+    var o=c.classList.toggle("open");c.setAttribute("aria-expanded",o?"true":"false");
+  });
+});
+
+var bar=document.getElementById("bar"),tick=false;
+window.addEventListener("scroll",function(){
+  if(tick)return;tick=true;
+  requestAnimationFrame(function(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?window.scrollY/h*100:0)+"%";
+    if(!reduce){var hero=document.querySelector("#hero h2");if(hero&&window.scrollY<window.innerHeight)hero.style.transform="translateY("+(window.scrollY*.18)+"px)"}
+    tick=false;
+  });
+},{passive:true});
+
+if(fine&&!reduce){
+  var g=document.getElementById("glow");
+  window.addEventListener("mousemove",function(e){g.style.opacity=1;g.style.left=e.clientX+"px";g.style.top=e.clientY+"px"});
+  document.addEventListener("mouseover",function(e){g.style.transform=e.target.closest("button")?"scale(1.9)":"scale(1)"});
+}
+
+var ans=document.getElementById("answer");
+function reply(msg){
+  ans.classList.remove("show");void ans.offsetWidth;
+  ans.textContent=msg;ans.classList.add("show");
+}
+document.getElementById("yes").addEventListener("click",function(){
+  reply("Thank you, Hitakshi. This honestly made me so happy. No rush at all, we’ll take it one nice moment at a time. ♡");
+  burst(70);setTimeout(function(){burst(50)},700);setTimeout(function(){burst(50)},1500);
+});
+var fr=document.getElementById("friends"),yes=document.getElementById("yes"),real=document.getElementById("real"),dodges=0,tx=0,ty=0;
+var funny=["Arre, pakad ke dikhao 😜","Itni jaldi? Nahi nahi 🙈","Yeh button thoda sharmila hai 😭","Oops, phisal gaya 🫣","Ek aur try? 😏","Nahi milunga 😎","Chal chal, kahin aur 🏃","Itna try? Respect 😂","Main toh hawa hoon 💨","Pakadna mushkil hi nahi, namumkin hai 😌"];
+function dodge(e){
+  if(e&&e.cancelable)e.preventDefault();
+  dodges++;
+  var r=fr.getBoundingClientRect(),m=14;
+  var nx=m+Math.random()*Math.max(1,W-r.width-2*m);
+  var ny=m+Math.random()*Math.max(1,H-r.height-2*m);
+  tx+=nx-r.left;ty+=ny-r.top;
+  fr.textContent=funny[(dodges-1)%funny.length];
+  fr.style.transform="translate("+tx+"px,"+ty+"px)";
+  yes.style.transform="scale("+(1+Math.min(dodges,5)*.04)+")";
+  if(dodges>=8)real.style.display="inline-block";
+}
+fr.addEventListener("mouseenter",dodge);
+fr.addEventListener("touchstart",dodge,{passive:false});
+fr.addEventListener("click",dodge);
+real.addEventListener("click",function(){
+  fr.style.display="none";real.style.display="none";
+  reply("Thank you for being honest with me, Hitakshi. I really respect that. Your comfort and happiness matter most, and I’m glad to have you in my life. 🤍");
+});
+})();
+</script>
+</body>
+</html>
